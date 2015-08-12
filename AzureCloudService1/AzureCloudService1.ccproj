@@ -12,6 +12,7 @@
     <AssemblyName>AzureCloudService1</AssemblyName>
     <StartDevelopmentStorage>True</StartDevelopmentStorage>
     <Name>AzureCloudService1</Name>
+    <UseWebProjectPorts>False</UseWebProjectPorts>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,6 +38,14 @@
     <ServiceConfiguration Include="ServiceConfiguration.Cloud.cscfg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Signupsworker\Signupsworker.csproj">
+      <Name>Signupsworker</Name>
+      <Project>{d559e1dd-eb50-401d-8390-1741beee18ca}</Project>
+      <Private>True</Private>
+      <RoleType>Worker</RoleType>
+      <RoleName>Signupsworker</RoleName>
+      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
+    </ProjectReference>
     <ProjectReference Include="..\Univ\Univ.csproj">
       <Name>Univ</Name>
       <Project>{11c051ec-aa5e-4517-b8cc-9d35762b9919}</Project>
@@ -47,12 +56,18 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Profiles" />
+    <Folder Include="SignupsworkerContent\" />
     <Folder Include="UnivContent\" />
     <Folder Include="WorkerRole1Content\" />
   </ItemGroup>
   <ItemGroup>
+    <DiagnosticsConfiguration Include="SignupsworkerContent\diagnostics.wadcfgx" />
     <DiagnosticsConfiguration Include="UnivContent\diagnostics.wadcfgx" />
     <DiagnosticsConfiguration Include="WorkerRole1Content\diagnostics.wadcfgx" />
+  </ItemGroup>
+  <ItemGroup>
+    <PublishProfile Include="Profiles\BUnivStaging.azurePubxml" />
   </ItemGroup>
   <!-- Import the target files for this project template -->
   <PropertyGroup>
