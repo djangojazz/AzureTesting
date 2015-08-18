@@ -26,14 +26,6 @@ namespace Signupsworker
                 Thread.Sleep(10000);
                 Trace.TraceInformation("Processing Signups...", "Information");
             }
-            //try
-            //{
-            //    this.RunAsync(this.cancellationTokenSource.Token).Wait();
-            //}
-            //finally
-            //{
-            //    this.runCompleteEvent.Set();
-            //}
         }
 
         public override bool OnStart()

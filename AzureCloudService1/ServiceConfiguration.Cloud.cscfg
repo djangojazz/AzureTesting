@@ -3,13 +3,13 @@
   <Role name="Univ">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=univtestdata;AccountKey=H4REh6cUXaRQ9AdpGSekq2q9G240nfbGG4ZUIuQu61Z9imKk9Gb99v90O92Cy2o/vSj+M/CMwHtPcpU21QBXEg==" />
     </ConfigurationSettings>
   </Role>
   <Role name="Signupsworker">
     <Instances count="4" />
     <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=univtestdata;AccountKey=H4REh6cUXaRQ9AdpGSekq2q9G240nfbGG4ZUIuQu61Z9imKk9Gb99v90O92Cy2o/vSj+M/CMwHtPcpU21QBXEg==" />
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>

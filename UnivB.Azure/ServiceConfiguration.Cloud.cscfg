@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="UnivB.Azure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2015-04.2.6">
+  <Role name="UnivB">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=univbstorage;AccountKey=3qYFrXSc5fXocTW3gVbualyPNMzP0l7uLJvy3sp7HIg9JHSsk+KAhX0cSPoJ/f0x0oGsNcKhy4Z1WvokXGaQ7g==" />
+    </ConfigurationSettings>
+  </Role>
+</ServiceConfiguration>

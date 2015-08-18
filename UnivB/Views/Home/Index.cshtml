@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<section class="featured">
+    <div class="content-wrapper">
+        <hgroup class="title">
+            <h1>@ViewBag.Title.</h1>
+            <h2>@ViewBag.Message</h2>
+        </hgroup>
+        <p>
+            Welcome to Azure Up and Running
+        </p>
+    </div>
+</section>
+
+
+<form action="/Home/Newsletter" method="POST">
+    @Html.TextBox("email");
+    <input type="submit" value="Signup"/>
+</form>
