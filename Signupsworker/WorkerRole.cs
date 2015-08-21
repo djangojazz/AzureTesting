@@ -9,11 +9,19 @@ using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.Diagnostics;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using Microsoft.WindowsAzure.Storage;
+using Microsoft.ServiceBus;
+using Microsoft.ServiceBus.Messaging;
+using Microsoft.WindowsAzure.Storage.Table;
+using Microsoft.WindowsAzure.Storage.Table.DataServices;
 
 namespace Signupsworker
 {
     public class WorkerRole : RoleEntryPoint
     {
+        private string ConnectionString = CloudConfigurationManager.GetSetting("Microsoft.ServiceBus.ConnectionString");
+        private string qname = "signups";
+        private string tableConnectionString = CloudConfigurationManager.GetSetting("TableStorageConnection");
+
         private readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         private readonly ManualResetEvent runCompleteEvent = new ManualResetEvent(false);
 
@@ -23,8 +31,25 @@ namespace Signupsworker
 
             while (true)
             {
-                Thread.Sleep(10000);
-                Trace.TraceInformation("Processing Signups...", "Information");
+                QueueClient qc = QueueClient.CreateFromConnectionString(ConnectionString, qname);
+                BrokeredMessage msg = qc.Receive();
+
+                if (msg != null)
+                {
+                    try
+                    {
+                        Trace.WriteLine("New Signup processed: " + msg.Properties["email"]);
+                        msg.Complete();
+
+                        // Log to table storage
+                        SaveToStorage(msg.Properties["email"].ToString());
+                    }
+                    catch (Exception)
+                    {
+                        // Indicate a problem, unlock the queue
+                        msg.Abandon();
+                    }
+                }
             }
         }
 
@@ -63,6 +88,26 @@ namespace Signupsworker
                 Trace.TraceInformation("Working");
                 await Task.Delay(1000);
             }
+        }
+
+        private void SaveToStorage(string email)
+        {
+            string tableName = "signups";
+            CloudStorageAccount account = CloudStorageAccount.Parse(tableConnectionString);
+
+            //Client for Table storage
+            CloudTableClient tableStorage = account.CreateCloudTableClient();
+            var cloudTable = tableStorage.GetTableReference(tableName);
+            cloudTable.CreateIfNotExists();
+
+            //Create person entity and set email
+            PersonEntity person = new PersonEntity();
+            person.Email = email;
+            person.PartitionKey = "signups";
+            person.RowKey = email;
+
+            //Save new person to the table
+            cloudTable.Execute(TableOperation.Insert(person));
         }
     }
 }

@@ -4,6 +4,15 @@
     <Instances count="1" />
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=univbstorage;AccountKey=3qYFrXSc5fXocTW3gVbualyPNMzP0l7uLJvy3sp7HIg9JHSsk+KAhX0cSPoJ/f0x0oGsNcKhy4Z1WvokXGaQ7g==" />
+      <Setting name="Microsoft.ServiceBus.ConnectionString" value="Endpoint=sb://univservicebus-ns.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=hhTLbO8glXcXmd2o+Fzz2ZEdxuVs+1PIUByad0EtsDE=" />
+    </ConfigurationSettings>
+  </Role>
+  <Role name="Signupsworker">
+    <Instances count="2" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=univbstorage;AccountKey=3qYFrXSc5fXocTW3gVbualyPNMzP0l7uLJvy3sp7HIg9JHSsk+KAhX0cSPoJ/f0x0oGsNcKhy4Z1WvokXGaQ7g==" />
+      <Setting name="Microsoft.ServiceBus.ConnectionString" value="Endpoint=sb://univservicebus-ns.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=hhTLbO8glXcXmd2o+Fzz2ZEdxuVs+1PIUByad0EtsDE=" />
+      <Setting name="TableStorageConnection" value="DefaultEndpointsProtocol=https;AccountName=univstorageservicebus;AccountKey=tF4JqSO0aSXlbquSz1DAS516k/vvRGNYcCUJ/DJGvxufArOCTvejEGJYkTh8/98PkO3LkGV6v3/upn2p//KHpw==" />
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>
